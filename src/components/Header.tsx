@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <header>
             <div className='border-b py-2 bg-[#F3FBF4] border-b-gray-100'>
-                <div className="max-w-3xl mx-auto w-full flex justify-between items-center py-3">
+                <div className="max-w-7xl mx-auto w-full flex justify-between items-center py-3">
                     <div className="flex items-center gap-2">
                         <Image className='bg-[#05893E] p-2.5 rounded-2xl' src={'/logo-icon.png'} width={45} height={45} alt='logo' />
                         <div>
@@ -29,7 +29,7 @@ const Header = () => {
                 </div>
             </div>
             <CategoryNavBar />
-            <Marquee />
+            {/* <Marquee /> */}
         </header>
 
 
