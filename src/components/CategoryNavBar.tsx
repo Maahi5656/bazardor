@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface ICategory{
     id: string,
@@ -16,15 +17,18 @@ const CategoryNavBar = async() => {
 
     return (
         <div className='border-b-2 border-b-gray-100 bg-[#FAFCFA] w-full py-3'>
-            <div className='max-w-7xl mx-auto w-full flex justify-start items-center gap-2.5'>
+            <ul className='max-w-7xl mx-auto w-full flex justify-start items-center gap-5'>
                 {
                     categories.map(category=>(
-                    <div className='flex gap-1' key={category.id}>
-                        <p className='text-[12p] font-semibold'>{ category.icon }</p>
-                        <p className='text-[12p] font-semibold'>{ category.nameBn }</p>
-                    </div>))
+                    <li className='w-fit flex' key={category.id}>
+                        <Link className='flex gap-1 items-center' href={`/category/${category.id}`}>
+                            <p className='text-[12p] font-semibold'>{ category.icon }</p>
+                            <p className='text-[12p] font-semibold'>{ category.nameBn }</p>                        
+                        </Link>
+
+                    </li>))
                 }
-            </div>
+            </ul>
         </div>
 
     )

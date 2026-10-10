@@ -22,7 +22,7 @@ interface Headlines {
 
 const Marquee = async() => {
 
-    const response = await fetch('https://api.api-store.workers.dev/api/bazardor/products');
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/data/bazarProducts.json`);
     const data = await response.json();
 
     const headlines: Headlines[] = data;

@@ -10,7 +10,7 @@ const Banner = () => {
     });
 
     return (
-        <div className='flex justify-between items-start bg-white rounded-2xl'>
+        <div className='flex justify-between items-start bg-[#E1E8E1] py-3.5 px-5 rounded-2xl'>
             <div>
                 <span className='inline-block text-[#05893E] bg-[#e1f1e7] py-2 px-2.5 rounded-2xl'>{ date }</span>
                 <h1 className='text-[36px] font-bold text-[#1D271F] mb-2'>আজকের বাজারের দাম এক নজরে</h1>
