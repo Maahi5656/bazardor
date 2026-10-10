@@ -1,8 +1,34 @@
 "use client"
 
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { authClient } from '@/lib/auth-client';
+import { redirect } from 'next/navigation';
 
 const ProfilePage = () => {
+
+    const { data:session } = authClient.useSession();
+    const user = session?.user;
+
+    console.log("Session User Data", user);
+
+    const updateUserHandler=async(e:React.SubmitEvent<HTMLElement>)=>{
+        e.preventDefault();
+
+        const formData = new FormData();
+        const newUserData = Object.fromEntries(formData.entries()) as {name:string} 
+    
+        await authClient.updateUser({
+            ...newUserData
+        })
+    }
+
+    const SignOutHandler=async()=>{
+        await authClient.signOut();
+        redirect('/');
+    }
+
     return (
         <div className='w-full flex justify-center mx-auto py-5'>
             <div className='max-w-5xl w-full'>
@@ -12,25 +38,25 @@ const ProfilePage = () => {
                 <div className='flex justify-between bg-white border border-gray-400 rounded-2xl p-5'>
                     <div className='flex gap-3 items-center'>
                         <div>
-                            <Image src={'/logo-icon.png'} width={45} height={45} alt='profile-photo' />
+                            <img className="w-15 rounded-full" src={user?.image as string} alt='profile-photo' />
                         </div>
                         <div>
-                            <h2 className='text-[20px] text-[#1D271F] font-bold text-left'>আমার প্রোফাইল</h2>
-                            <p className='text-[16px] text-[#5C655E] font-semibold text-left'>আপনার অ্যাকাউন্টের তথ্য এখানে দেখুন।</p>
+                            <h2 className='text-[20px] text-[#1D271F] font-bold text-left'>{ user?.name }</h2>
+                            <p className='text-[16px] text-[#5C655E] font-semibold text-left'>{ user?.email }</p>
                         </div>
                     </div>
                     <div>
-                        <button className='bg-transparent text-[#D03739] font-bold border-2 border-[#D03739] rounded-2xl py-2 px-2.5'>↩ সাইন আউট</button>
+                        <button onClick={SignOutHandler} className='bg-transparent text-[#D03739] font-bold border-2 border-[#D03739] rounded-2xl py-2 px-2.5 cursor-pointer'>↩ সাইন আউট</button>
                     </div>
                 </div>  
                 <br />
                 <div className='bg-white border border-gray-400 rounded-2xl p-5'>
                     <h2 className='text-[20px] text-[#1D271F] font-bold text-left mb-2.5'>তথ্য</h2>
                     <br />
-                    <form>
+                    <form onSubmit={updateUserHandler}>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>নাম</label>
-                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="text" placeholder='যেমন: রহিম উদ্দিন' />
+                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="text" defaultValue={user?.name} placeholder='যেমন: রহিম উদ্দিন' />
                         </div>    
                         <div className='mb-2.5'>
                             <button className="text-[14px] text-white font-semibold py-2.5 bg-[#05893E] w-full border-0 cursor-pointer rounded" type="submit">আপডেট</button>                        

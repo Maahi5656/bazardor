@@ -16,7 +16,7 @@ const SignInPage = () => {
 
         const { data, error } = await authClient.signIn.email({
             ...user,
-            callbackURL: "/",
+            callbackURL: "/profile",
         });
 
         if(data){

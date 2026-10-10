@@ -26,7 +26,7 @@ const SignUpPage = () => {
 
         const {data, error} = await authClient.signUp.email({
             ...user,
-            callbackURL: "/"
+            callbackURL: "/signin"
         })
 
         if(data){
@@ -65,7 +65,7 @@ const SignUpPage = () => {
                             <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' name="email" type="text" placeholder='you@example.com' />
                         </div>
                         <div className='mb-2.5'>
-                            <input type="text" name="image" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCAXOYueXDQfxhs7vsSfUQGkPNM1XENi9Bxg7IMPY3A&s=10" id="" hidden/>
+                            <input type="text" name="image" defaultValue="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtCAXOYueXDQfxhs7vsSfUQGkPNM1XENi9Bxg7IMPY3A&s=10" id="" readOnly hidden/>
                         </div>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>পাসওয়ার্ড</label>
