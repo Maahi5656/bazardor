@@ -29,7 +29,7 @@ const Header = () => {
                 </div>
             </div>
             <CategoryNavBar />
-            {/* <Marquee /> */}
+            <Marquee />
         </header>
 
 
