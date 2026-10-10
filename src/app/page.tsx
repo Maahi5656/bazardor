@@ -7,7 +7,7 @@ import ProductList from '@/components/ProductList'
 export default function Home() {
   return (
     <div className="">
-      <main className="w-full min-h-full max-w-7xl mx-auto py-5 px-16">
+      <main className="w-full min-h-full max-w-7xl mx-auto py-5">
         <Banner />
         <PriceSection />
         <ProductList />

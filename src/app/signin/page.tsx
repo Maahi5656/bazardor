@@ -1,8 +1,43 @@
-import React from 'react'
+"use client"
 
+import React from 'react'
 import Link from 'next/link'
+import toast from 'react-hot-toast';
+
+import { authClient } from '@/lib/auth-client';
 
 const SignInPage = () => {
+
+    const SignInHandler=async(e:React.SubmitEvent<HTMLElement>)=>{
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const user = Object.fromEntries(formData.entries()) as {email:string, password:string};
+
+        const { data, error } = await authClient.signIn.email({
+            ...user,
+            callbackURL: "/",
+        });
+
+        if(data){
+            toast.success("Signed In Successfully");
+            console.log(data);
+        }
+
+        if(error){
+            toast.error("Error! Unable To Log In");
+            console.log(error);
+        }
+    }
+
+    const handleGoogleSignIn=async()=>{
+        const data = await authClient.signIn.social({
+            provider: "google"
+        });
+
+        console.log("google sign-in", data);
+    }
+
     return (
         <div className='w-full flex justify-center py-5 bg-[#F0F5F0]'>
             <div>
@@ -10,21 +45,21 @@ const SignInPage = () => {
                 <p className='text-[14px] text-[#5C655E] font-semibold text-center'>বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।</p>
                 <br />
                 <div className='bg-white border border-gray-400 max-w-2xl rounded-2xl p-5'>
-                    <form>
+                    <form onSubmit={SignInHandler}>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>ইমেইল</label>
-                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="text" placeholder='you@example.com' />
+                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="text" placeholder='you@example.com' required/>
                         </div>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>পাসওয়ার্ড</label>
-                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="password" placeholder='কমপক্ষে ৮ অক্ষর' />
+                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="password" placeholder='কমপক্ষে ৮ অক্ষর' required/>
                         </div>
                         <div className='mb-2.5'>
                             <button className="text-[14px] text-white font-semibold py-2.5 bg-[#05893E] w-full border-0 cursor-pointer rounded" type="submit">সাইন ইন</button>
                         </div>
                     </form>
                     <div className='flex gap-2.5 mb-3.5'>
-                        <button className='bg-white border border-gray-500 rounded px-2.5 py-2 w-[50%] cursor-pointer'>Google দিয়ে চালিয়ে যান</button>
+                        <button onClick={handleGoogleSignIn} className='bg-white border border-gray-500 rounded px-2.5 py-2 w-[50%] cursor-pointer'>Google দিয়ে চালিয়ে যান</button>
                         <button className='bg-white border border-gray-500 rounded px-2.5 py-2 w-[50%] cursor-pointer'>GitHub দিয়ে চালিয়ে যান</button>
                     </div>
                     <div className='text-center'>
