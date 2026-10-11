@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import Banner from "@/components/Banner";
 import PriceSection from "@/components/PriceSection";
 import ProductList from '@/components/ProductList'
