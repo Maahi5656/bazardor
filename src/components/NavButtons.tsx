@@ -13,6 +13,11 @@ const NavButtons = () => {
 
     console.log("Session User Data", user);
 
+    const handleSignOut=async()=>{
+        await authClient.signOut();
+        redirect("/");
+    }
+
     return (
         <>
             {
@@ -21,12 +26,25 @@ const NavButtons = () => {
                         <Link href={"/profile"}>
                             <div className="avatar">
                               <div className="ring-primary ring-offset-base-100 w-15 rounded-full ring-2 ring-offset-2">
-                                <img className="w-15 rounded-full" alt="Tailwind-CSS-Avatar-component" src={user?.image as string} />
+                                {
+                                    user?.image ? <img className="w-15 rounded-full" alt="P" src={user?.image as string} /> : <img className="w-15 rounded-full" alt="P" src="/public/blank-profile-picture.jpg" />
+                                }
                               </div>
                             </div>
                         </Link>
                         <h2 className="font-bold">{ user?.name }</h2>
-                    </div>                
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="rounded-field cursor-pointer">▼</div>
+                            <ul tabIndex={-1} className="menu dropdown-content bg-base-200 rounded-box z-1 mt-4 p-2 shadow-sm">
+                              <li>
+                                <h2 className='text-[12px] text-[#1D271F] font-semibold'>{ user?.name }</h2>
+                                <p className='text-[12px] text-[#1D271F] font-semibold'>{ user?.email }</p>
+                              </li>
+                              <li><Link className='text-[12px] text-[#1D271F] mb-1.5 font-semibold' href={'/profile'}>আমার প্রোফাইল</Link></li>
+                              <li><button className='border-0 outline-0 bg-transparent' onClick={handleSignOut}>↩ সাইন আউট</button></li>
+                            </ul>
+                            </div>                        
+                        </div>                
                 ) : (
                     <div className='flex items-center gap-2.5'>
                         <Link href='/signin' className='text-[#1D271F] text-[14px] font-semibold'><b>সাইন ইন</b></Link>

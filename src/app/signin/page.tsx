@@ -38,6 +38,14 @@ const SignInPage = () => {
         console.log("google sign-in", data);
     }
 
+    const handleGitHubSignIn=async()=>{
+        const data = await authClient.signIn.social({
+            provider: "github"
+        });
+
+        console.log("github sign-in", data);        
+    }
+
     return (
         <div className='w-full flex justify-center py-5 bg-[#F0F5F0]'>
             <div>
@@ -60,7 +68,7 @@ const SignInPage = () => {
                     </form>
                     <div className='flex gap-2.5 mb-3.5'>
                         <button onClick={handleGoogleSignIn} className='bg-white border border-gray-500 rounded px-2.5 py-2 w-[50%] cursor-pointer'>Google দিয়ে চালিয়ে যান</button>
-                        <button className='bg-white border border-gray-500 rounded px-2.5 py-2 w-[50%] cursor-pointer'>GitHub দিয়ে চালিয়ে যান</button>
+                        <button onClick={handleGitHubSignIn} className='bg-white border border-gray-500 rounded px-2.5 py-2 w-[50%] cursor-pointer'>GitHub দিয়ে চালিয়ে যান</button>
                     </div>
                     <div className='text-center'>
                         <p className='text-[14px] text-[#1D271F] font-semibold'>অ্যাকাউন্ট নেই? <Link href='/signup' className="text-[14px] text-[#05893E] font-semibold">সাইন আপ করুন</Link> </p>
