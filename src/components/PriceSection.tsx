@@ -27,8 +27,10 @@ interface IProduct{
 
 const PriceSection = async() => {
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/data/bazarProducts.json`);
+    const response = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
     const products:IProduct[]  = await response.json();
+
+    console.log(products);
 
     const productPriceUp:IProduct[] = products.filter((product)=>product.change.dir === "up");
     const productPriceDown:IProduct[] = products.filter((product)=>product.change.dir === "down");

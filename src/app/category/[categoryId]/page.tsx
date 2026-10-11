@@ -28,7 +28,7 @@ interface ICategoryPageProps{
 const CategoryProduct = async({params}:ICategoryPageProps) => {
 
     const { categoryId } = await params;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/data/bazarProducts.json`);
+    const response = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
     const products: ICategoryProducts[] = await response.json();
     const categoryProduct = products.filter((cp)=>cp.category === categoryId)
      
@@ -37,7 +37,7 @@ const CategoryProduct = async({params}:ICategoryPageProps) => {
 
     console.log(products);
 
-    const second_response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/data/bazarCategories.json`)
+    const second_response = await fetch('https://openapi.programming-hero.com/api/bazardor/categories')
     const category: ICategory[] = await second_response.json();
     const categoryItem = category.find((c)=>c.id  === categoryId)
 

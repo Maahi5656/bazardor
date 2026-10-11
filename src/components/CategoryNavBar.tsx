@@ -10,7 +10,7 @@ interface ICategory{
 
 const CategoryNavBar = async() => {
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/data/bazarCategories.json`);
+    const response = await fetch('https://openapi.programming-hero.com/api/bazardor/categories');
     const categories: ICategory[] = await response.json();
 
     console.log(categories);
