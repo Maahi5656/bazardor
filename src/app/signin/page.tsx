@@ -24,7 +24,7 @@ const SignInPage = () => {
         }
 
         if(error){
-            toast.error("Error! Unable To Log In");
+            toast.error(error?.message as string);
             console.log(error);
         }
     }
@@ -55,11 +55,11 @@ const SignInPage = () => {
                     <form onSubmit={SignInHandler}>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>ইমেইল</label>
-                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="text" placeholder='you@example.com' required/>
+                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' name="email" type="text" placeholder='you@example.com' required/>
                         </div>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>পাসওয়ার্ড</label>
-                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="password" placeholder='কমপক্ষে ৮ অক্ষর' required/>
+                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' name="password" type="password" placeholder='কমপক্ষে ৮ অক্ষর' required/>
                         </div>
                         <div className='mb-2.5'>
                             <button className="text-[14px] text-white font-semibold py-2.5 bg-[#05893E] w-full border-0 cursor-pointer rounded" type="submit">সাইন ইন</button>

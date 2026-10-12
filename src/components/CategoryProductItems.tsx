@@ -38,8 +38,8 @@ const CategoryProductItems = ({products}:{products: ICategoryProducts[]}) => {
     
     return (
         <>
-            <div className='w-full flex justify-between items-center gap-1.5'>
-                <p className='text-[14px] text-[#5C655E] font-semibold mb-2.5'>মোট {products.length}টি পণ্য দেখানো হচ্ছে</p>
+            <div className='w-full flex justify-between items-center gap-1.5 mb-4'>
+                <p className='text-[14px] text-[#5C655E] font-semibold'>মোট {products.length} টি পণ্য দেখানো হচ্ছে</p>
                 <div className='flex items-center gap-1.5'>
                     <span className='text-[14px] text-[#5C655E] font-semibold'>সাজান</span>
                     <select value={sortOrder} onChange={(e)=>setSortOrder(e.target.value)} className='border-2 border-gray-400 p-1.5 rounded' name="" id="">
@@ -55,7 +55,7 @@ const CategoryProductItems = ({products}:{products: ICategoryProducts[]}) => {
                         return(
                             <Link key={p.id} href={`/product/${p.id}`}>
                                 <div className='bg-white border-2 border-gray-400 p-2.5 rounded-2xl'>
-                                    <div className='flex items-center gap-0.5'>
+                                    <div className='flex items-center gap-0.5 mb-2.5'>
                                         <h2 className='text-[45px]'>{ p.image }</h2>
                                         <div>
                                             <h2 className='text-[16px] text-[#1D271F] font-bold'>{p.nameBn}</h2>

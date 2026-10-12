@@ -2,6 +2,7 @@
 
 import { authClient } from '@/lib/auth-client';
 import { redirect } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const ProfilePage = () => {
 
@@ -13,12 +14,22 @@ const ProfilePage = () => {
     const updateUserHandler=async(e:React.SubmitEvent<HTMLElement>)=>{
         e.preventDefault();
 
-        const formData = new FormData();
-        const newUserData = Object.fromEntries(formData.entries()) as {name:string} 
-    
-        await authClient.updateUser({
+        const formData = new FormData(e.target);
+        const newUserData = Object.fromEntries(formData.entries()) as {name:string};
+        
+        const { data, error } = await authClient.updateUser({
             ...newUserData
-        })
+        });
+
+        if(data){
+            toast.success("Profile Updated Successfully");
+            console.log(data);
+        }
+
+        if(error){
+            toast.error(error?.message as string);
+            console.log(error);
+        }
     }
 
     const SignOutHandler=async()=>{
@@ -53,7 +64,7 @@ const ProfilePage = () => {
                     <form onSubmit={updateUserHandler}>
                         <div className='mb-2.5'>
                             <label className='block text-[14px] text-[#1D271F] mb-1.5 font-semibold'>নাম</label>
-                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' type="text" defaultValue={user?.name} placeholder='যেমন: রহিম উদ্দিন' />
+                            <input className='w-full py-2 px-2.5 border-2 border-[#E1E8E1] rounded' name="name" type="text" defaultValue={user?.name} placeholder='যেমন: রহিম উদ্দিন' />
                         </div>    
                         <div className='mb-2.5'>
                             <button className="text-[14px] text-white font-semibold py-2.5 bg-[#05893E] w-full border-0 cursor-pointer rounded" type="submit">আপডেট</button>                        

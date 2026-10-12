@@ -38,7 +38,7 @@ const PriceSection = async() => {
     return (
         <section>
             <br />
-            <h2 className='text-[20px] text-[#1D271F] font-bold mb-3'>▲ আজ দাম বেড়েছে</h2>
+            <h2 className='text-[20px] text-[#1D271F] font-bold mb-3'><span className="text-[#D03739]">▲</span> আজ দাম বেড়েছে</h2>
             <div className='grid grid-cols-3 gap-2.5'>
                 {
                     productPriceUp.map((item)=>{
@@ -69,7 +69,7 @@ const PriceSection = async() => {
 
             </div>
             <br />
-            <h2 className='text-[20px] text-[#1D271F] font-bold mb-3'>▼ আজ দাম কমেছে</h2>
+            <h2 className='text-[20px] text-[#1D271F] font-bold mb-3'><span className="text-[#05893E]">▼</span> আজ দাম কমেছে</h2>
             <div className='grid grid-cols-3 gap-2.5'>
                 {
                     productPriceDown.map((item)=>{
